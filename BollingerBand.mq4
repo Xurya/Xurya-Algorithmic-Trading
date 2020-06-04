@@ -1,6 +1,6 @@
 int package[2];
 
-int BollingerBandEntry(){
+int BollingerSqueezeEntry(){
    double top = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_UPPER,0);
    double topL = iBands(pair, PERIOD_M30, 20, 1.0, 0, PRICE_CLOSE, MODE_UPPER,0);
    double bottom = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_LOWER,0);
@@ -53,9 +53,9 @@ int BollingerBandEntry(){
       //Analyze breakout direction
       
       //Signal if RSI hits over thresholds
-      if(rsi<70 && rsiL>70){
+      if(rsi<75 && rsiL>75){
          return OP_SELL;
-      }else if(rsi>30 && rsiL<30){
+      }else if(rsi>10 && rsiL<10){
          return OP_BUY;
       }
    }
@@ -64,7 +64,7 @@ int BollingerBandEntry(){
 }
 
 
-int BollingerBandExit(){
+int BollingerSqueezeExit(){
    double top = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_UPPER,0);
    double topL = iBands(pair, PERIOD_M30, 20, 1.0, 0, PRICE_CLOSE, MODE_UPPER,0);
    double bottom = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_LOWER,0);
@@ -76,18 +76,13 @@ int BollingerBandExit(){
    double rsi = iRSI(pair, PERIOD_M30, 20, PRICE_CLOSE, 0);
    double rsiL = iRSI(pair,PERIOD_M30, 20, PRICE_CLOSE, 2);
    
-   if(package[1]==0){
-      //Recalibrate
-      BollingerBandExit();
-   }
-   
    if(package[1]==1){
       //Analyze breakout direction
       
       //Signal if RSI hits over thresholds
       if(rsi<70 && rsiL>70){
          return OP_SELL;
-      }else if(rsi>30 && rsiL<30){
+      }else if(rsi>70 && rsiL<70){
          return OP_BUY;
       }
    }
