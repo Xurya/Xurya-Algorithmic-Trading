@@ -25,6 +25,9 @@ int BollingerSqueezeEntry(){
       temptop = iBands(pair, PERIOD_D1, 20, 2.0, 0, PRICE_CLOSE, MODE_UPPER,i);
       tempbottom = iBands(pair, PERIOD_D1, 20, 2.0, 0, PRICE_CLOSE, MODE_LOWER,i);
       tempSMA20 = iMA(pair, PERIOD_D1, 20, 0, MODE_SMA, PRICE_CLOSE, i);
+      if(tempSMA20==0){
+         tempSMA20=1;
+      }
       tempBBW= (temptop-tempbottom)/tempSMA20;
       avgBBW += tempBBW; 
       lowBBW = MathMin(lowBBW, tempBBW); 
