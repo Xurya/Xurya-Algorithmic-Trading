@@ -4,14 +4,6 @@
    //-Squeeze 
    //-Regular / Reverse / contrarian
    //-Volatile -> Fading/Contrarian Bollinger
-   
-   //Try to incorperate RSI for regular trading, MFI for reversals.
-   double rsi = iRSI(pair, PERIOD_M30, 14, PRICE_CLOSE, 0);
-   double rsiL = iRSI(pair,PERIOD_M30, 14, PRICE_CLOSE, 2);
-
-   //TODO: IDENTIFY IF WE ARE STILL WITHIN A SQUEEZe.
-   
-   //TODO: ADD EVENT VISUALS FOR SQUEEZE.
 */
 
 int squeeze = 0;
@@ -28,13 +20,16 @@ int BollingerSqueezeSignal(){
    double bottom = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_LOWER,0);
    double SMA20 = iMA(pair, PERIOD_M30, 20, 0, MODE_SMA, PRICE_CLOSE, 0);
    double BBW = (top-bottom)/SMA20; 
+   string name = "Squeeze" + Time[0];
    
    //Squeeze continuation
-   if(squeeze == 1){
-      if(BBW >= 1.3*oldBBW){
+   if(squeeze > 0){
+      if(BBW >= oldBBW){
          squeeze = 0;
       }else{
-         ObjectCreate(ChartID(), "Squeeze" + Time[0], OBJ_ARROW_CHECK,0,Time[0], Ask); 
+         squeeze++;
+         ObjectCreate(ChartID(),name, OBJ_ARROW_STOP,0,Time[0], Ask); 
+         ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrYellow);
       }
       return squeeze;
    }
@@ -56,7 +51,8 @@ int BollingerSqueezeSignal(){
 
    //Squeeze Trading
    if(BBW<=lowBBW){
-      ObjectCreate(ChartID(),"Squeeze" + Time[0], OBJ_ARROW_CHECK,0,Time[0], Ask); 
+      ObjectCreate(ChartID(),name, OBJ_ARROW_STOP,0,Time[0], Ask); 
+      ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrYellow);
       squeeze = 1;
       oldBBW=BBW;
    }
@@ -70,12 +66,15 @@ int BollingerBandSignal(){
    double bottom = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_LOWER,0);
    double bottomL = iBands(pair, PERIOD_M30, 20, 1.0, 0, PRICE_CLOSE, MODE_LOWER,0);
    
+   string name = "BollingerBand " + Time[0];
    //Range Trading
-   if(Ask < topL && Close[1]>topL){
-      ObjectCreate(ChartID(), "BollingerBand " + Time[0], OBJ_ARROW_SELL, 0, Time[0], Ask);
+   if(Ask < top && Close[2] > top && Ask > topL){
+      ObjectCreate(ChartID(), name, OBJ_ARROW_DOWN, 0, Time[0], Ask);
+      ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrRed);
       return OP_SELL;
-   }else if(Bid > bottomL && Close[1] < bottomL){
-      ObjectCreate(ChartID(), "BollingerBand " + Time[0], OBJ_ARROW_BUY, 0, Time[0], Ask);
+   }else if(Bid > bottom && Close[2] < bottom && Bid > bottomL){
+      ObjectCreate(ChartID(), name, OBJ_ARROW, 0, Time[0], Bid);
+      ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrAliceBlue);
       return OP_BUY;
    }
    

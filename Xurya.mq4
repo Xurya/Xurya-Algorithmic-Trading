@@ -89,8 +89,12 @@ void EntryAnalysis(){
    //Insert Squeeze timer to switch trading modes.
    
    if(!squeezeSig){ //TODO: Add squeeze timer to ignore this part.
-      //Range Trading.
-      sig = BollingerBandSignal() && MACrossSignal();
+      int bandSig = BollingerBandSignal();
+      int rsiCrossSig = RSICrossSignal();
+      //heuristics
+      if(bandSig == rsiCrossSig){
+         sig = bandSig;
+      }
    }
    
    
@@ -114,11 +118,17 @@ void EntryAnalysis(){
 void ExitAnalysis(){
    //Get Exit Signals
    int sig = -1;
-   int bandSig = BollingerBandSignal();
-   int MASig = MACrossSignal();
+   int squeezeSig = BollingerSqueezeSignal();
+   //Insert Squeeze timer to switch trading modes.
    
-   //Heuristics:
-   sig = MASig;
+   if(!squeezeSig){ //TODO: Add squeeze timer to ignore this part.
+      int bandSig = BollingerBandSignal();
+      int rsiCrossSig = RSICrossSignal();
+      //heuristics
+      if(bandSig == rsiCrossSig){
+         sig = bandSig;
+      }
+   }
 
    //If it gets to this point, OrderSelect is already correct and the ticket is not closed.
    int order_type = OrderType();
