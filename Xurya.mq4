@@ -24,6 +24,7 @@ double unit_pip = 0;
 datetime LastTimeBar=0;
 double minLot = 0.01;
 double maxLot = 1.00;
+int mode = -1;
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -88,7 +89,7 @@ void EntryAnalysis(){
    int squeezeSig = BollingerSqueezeSignal();
    //Insert Squeeze timer to switch trading modes.
    
-   if(!squeezeSig){ //TODO: Add squeeze timer to ignore this part.
+   if(mode != 0){ //TODO: Add squeeze timer to ignore this part.
       int bandSig = BollingerBandSignal();
       int rsiCrossSig = RSICrossSignal();
       //heuristics

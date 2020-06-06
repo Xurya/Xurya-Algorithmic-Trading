@@ -68,11 +68,11 @@ int BollingerBandSignal(){
    
    string name = "BollingerBand " + Time[0];
    //Range Trading
-   if(Ask < top && Close[2] > top && Ask > topL){
+   if(Ask < top && iClose(pair, PERIOD_M30, 2) > top && Ask > topL){
       ObjectCreate(ChartID(), name, OBJ_ARROW_DOWN, 0, Time[0], Ask);
       ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrRed);
       return OP_SELL;
-   }else if(Bid > bottom && Close[2] < bottom && Bid > bottomL){
+   }else if(Bid > bottom && iClose(pair, PERIOD_M30, 2) < bottom && Bid < bottomL){
       ObjectCreate(ChartID(), name, OBJ_ARROW, 0, Time[0], Bid);
       ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrAliceBlue);
       return OP_BUY;
