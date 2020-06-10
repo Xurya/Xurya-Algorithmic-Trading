@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//|                                                        Xurya.mq4 |
+//|                                               Xurya-Adaptive.mq4 |
 //|                                                          Ryan Xu |
 //|                                                                  |
 //+------------------------------------------------------------------+
@@ -7,15 +7,9 @@
 
 #define MAGICMA 20000911
 
-#import "MACross.mq4"
-#import
-
-#import "BollingerBand.mq4"
-#import
-
 //--- input parameters
-input float    risk=0.01;
-input float    sl_pips = 25;
+input double   risk=0.01;
+input int      sl_pips = 25;
 input int      trailing_pips=30;
 
 int ticket = -1;
@@ -99,7 +93,7 @@ void EntryAnalysis(){
    }
    
    
-   double lot_size = NormalizeDouble(MathMin(MathMax((risk*AccountBalance()/20)/10, minLot), maxLot),2);
+   double lot_size = NormalizeDouble(MathMin(MathMax((risk*AccountBalance()/sl_pips)/10, minLot), maxLot),2);
    
    //Check if we have money in the account
    if(AccountFreeMargin()<(1000*lot_size)){

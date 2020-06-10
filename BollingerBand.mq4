@@ -10,7 +10,7 @@ int squeeze = 0;
 double oldBBW = 0;
 
 int BollingerSqueezeSignal(){
-   int bars = 100;
+   int bars = 1000;
    if(Bars<bars+20){
       Print("bars less than " + bars);
       return -1;
@@ -24,7 +24,7 @@ int BollingerSqueezeSignal(){
    
    //Squeeze continuation
    if(squeeze > 0){
-      if(BBW >= oldBBW){
+      if(BBW >= oldBBW*1.1){
          squeeze = 0;
       }else{
          squeeze++;
@@ -50,7 +50,7 @@ int BollingerSqueezeSignal(){
    }
 
    //Squeeze Trading
-   if(BBW<=lowBBW){
+   if(BBW<lowBBW){
       ObjectCreate(ChartID(),name, OBJ_ARROW_STOP,0,Time[0], Ask); 
       ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrYellow);
       squeeze = 1;
