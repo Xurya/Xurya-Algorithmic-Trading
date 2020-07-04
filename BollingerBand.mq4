@@ -9,8 +9,7 @@
 int squeeze = 0;
 double oldBBW = 0;
 
-int BollingerSqueezeSignal(){
-   int bars = 1000;
+int BollingerSqueezeSignal(int bars){
    if(Bars<bars+20){
       Print("bars less than " + bars);
       return -1;
@@ -45,6 +44,9 @@ int BollingerSqueezeSignal(){
       temptop = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_UPPER,i);
       tempbottom = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_LOWER,i);
       tempSMA20 = iMA(pair, PERIOD_M30, 20, 0, MODE_SMA, PRICE_CLOSE, i);
+      if(tempSMA20 == 0){
+         continue;
+      }
       tempBBW= (temptop-tempbottom)/tempSMA20;
       lowBBW = MathMin(lowBBW, tempBBW); 
    }
@@ -60,13 +62,34 @@ int BollingerSqueezeSignal(){
    return squeeze;
 }
 
-int BollingerBandSignal(){
+int BollingerBandBreak(){
    double top = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_UPPER,0);
    double topL = iBands(pair, PERIOD_M30, 20, 1.0, 0, PRICE_CLOSE, MODE_UPPER,0);
    double bottom = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_LOWER,0);
    double bottomL = iBands(pair, PERIOD_M30, 20, 1.0, 0, PRICE_CLOSE, MODE_LOWER,0);
    
-   string name = "BollingerBand " + Time[0];
+   string name = "BollingerBreak " + Time[0];
+   //Range Trading
+   if(Ask > top){
+      ObjectCreate(ChartID(), name, OBJ_ARROW, 0, Time[0], Bid);
+      ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrAliceBlue);
+      return OP_BUY;
+   }else if(Bid < bottom){
+      ObjectCreate(ChartID(), name, OBJ_ARROW_DOWN, 0, Time[0], Ask);
+      ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrRed);
+      return OP_SELL;
+   }
+   
+   return -1;
+}
+
+int BollingerBandRange(){
+   double top = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_UPPER,0);
+   double topL = iBands(pair, PERIOD_M30, 20, 1.0, 0, PRICE_CLOSE, MODE_UPPER,0);
+   double bottom = iBands(pair, PERIOD_M30, 20, 2.0, 0, PRICE_CLOSE, MODE_LOWER,0);
+   double bottomL = iBands(pair, PERIOD_M30, 20, 1.0, 0, PRICE_CLOSE, MODE_LOWER,0);
+   
+   string name = "BollingerRange " + Time[0];
    //Range Trading
    if(Ask < top && iClose(pair, PERIOD_M30, 2) > top && Ask > topL){
       ObjectCreate(ChartID(), name, OBJ_ARROW_DOWN, 0, Time[0], Ask);
