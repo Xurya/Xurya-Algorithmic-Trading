@@ -1,4 +1,3 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-* linguist-vendored
-*.mq4 linguist-vendored=false
+Report/* linguist-vendored=true
