@@ -10,7 +10,7 @@
 //--- input parameters
 input double      risk=0.005;
 input double      maxBalance = 0;
-input int         slatrScale=3;
+input double      slatrScale=3;
 input int         squeezeBars=500;
 
 //int ticketBUY = -1; Hedging Banned
