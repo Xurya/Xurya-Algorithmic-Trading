@@ -21,7 +21,7 @@ Medium Term:
 
 -Develop better user interface and event logging for data collection
 
--Run first EA on live servers 24/7 through VNC/VPS
+-Run first EA on live servers 24/7 through VNC/VPS - Completed 7/21/20
 
 Long Term:
 
