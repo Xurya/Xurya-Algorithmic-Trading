@@ -3,38 +3,42 @@ My algorithmic trading EA's, scripts, and related work.
 
 Personal Goals:
 
-Short Term:
+* Short Term:
 
--Backtest using QuantManager and Duskacopy data - Completed 06/05/2020
+  * Backtest using QuantManager and Duskacopy data :heavy_check_mark:
+    > Completed 06/05/2020
 
--Run first EA on demo servers 24/7 through VNC/VPS - Completed 06/08/2020
+  * Run first EA on demo servers 24/7 through VNC/VPS :heavy_check_mark:
+    > Completed 06/08/2020
 
--Backtest, optimize, and cross-validate EA - Completed 7/20/2020
+  * Backtest, optimize, and cross-validate EA :heavy_check_mark:
+    > Completed 7/20/2020
 
--Run first EA on live servers 24/7 through VNC/VPS - Completed 7/21/2020
+  * Run first EA on live servers 24/7 through VNC/VPS :heavy_check_mark:
+    > Completed 7/21/2020
 
--Barebones disk snapshot in preparation for low RAM micro session
+  * Barebones disk snapshot in preparation for low RAM micro session
 
--Command line mt4 integration and testing for micro version.
+  * Command line mt4 integration and testing for micro version.
 
-Medium Term:
+* Medium Term:
 
--Implement Support/Resistance analysis
+  * Implement Support/Resistance analysis
 
--Implement 10 different trading strategies
+  * Implement 10 different trading strategies
 
--Develop dynamic heuristical risk management beyond trailing stops
+  * Develop dynamic heuristical risk management beyond trailing stops
 
--Develop dynamic heuristical analysis and profit maximization
+  * Develop dynamic heuristical analysis and profit maximization
 
--Develop better user interface and event logging for data collection
+  * Develop better user interface and event logging for data collection
 
 Long Term:
 
--Beat Inflation and VNC/VPS costs for a year
+ * Beat Inflation and VNC/VPS costs for a year
 
--Develop a unique custom indicator and a corresponding EA
+ * Develop a unique custom indicator and a corresponding EA
 
--Develop interactible EA
+ * Develop interactible EA
 
--Create a fleet of EAs with different strategies, time frames, risk management, and techniques
+ * Create a fleet of EAs with different strategies, time frames, risk management, and techniques
