@@ -9,19 +9,25 @@ Short Term:
 
 -Run first EA on demo servers 24/7 through VNC/VPS - Completed 06/08/2020
 
+-Backtest, optimize, and cross-validate EA - Completed 7/20/2020
+
+-Run first EA on live servers 24/7 through VNC/VPS - Completed 7/21/2020
+
+-Barebones disk snapshot in preparation for low RAM micro session
+
+-Command line mt4 integration and testing for micro version.
+
+Medium Term:
+
 -Implement Support/Resistance analysis
 
 -Implement 10 different trading strategies
-
-Medium Term:
 
 -Develop dynamic heuristical risk management beyond trailing stops
 
 -Develop dynamic heuristical analysis and profit maximization
 
 -Develop better user interface and event logging for data collection
-
--Run first EA on live servers 24/7 through VNC/VPS - Completed 7/21/20
 
 Long Term:
 
