@@ -33,12 +33,12 @@ Personal Goals:
 
   * Develop better user interface and event logging for data collection
 
-Long Term:
+* Long Term:
 
- * Beat Inflation and VNC/VPS costs for a year
+  * Beat Inflation and VNC/VPS costs for a year
 
- * Develop a unique custom indicator and a corresponding EA
+  * Develop a unique custom indicator and a corresponding EA
 
- * Develop interactible EA
+  * Develop interactible EA
 
- * Create a fleet of EAs with different strategies, time frames, risk management, and techniques
+  * Create a fleet of EAs with different strategies, time frames, risk management, and techniques
