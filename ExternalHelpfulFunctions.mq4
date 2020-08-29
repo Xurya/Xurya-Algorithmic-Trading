@@ -43,3 +43,20 @@ double dblLotsRisk( string strSymbol, double dblStopLossPips, double dblRiskMaxP
 
        return ( dblCalcLot );
 }
+
+int OrderCounter(int magic_number)
+{    
+    //we pass in the order's magic number and then use a basic for loop to
+    //keep track of the number of trades.
+    
+    int totalOrders = 0;
+    
+    for(int count = 0; count < OrdersTotal(); count++){
+        OrderSelect(count, SELECT_BY_POS, MODE_TRADES);
+        if(OrderMagicNumber() == magic_number){
+            totalOrders += 1;
+        }
+    }
+    
+    return(totalOrders);
+}
