@@ -1,4 +1,4 @@
 
-double ATRStop(int timeframe, int period, int multiple){
-   return multiple * iATR(pair, timeframe, period, 1);
+double ATRStop(string symbol, int timeframe, int period, int multiple){
+   return multiple * iATR(symbol, timeframe, period, 1);
 }
