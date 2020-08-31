@@ -122,10 +122,11 @@ void EntryAnalysis(){
 
 void ExitAnalysis(){
 	int chikouSpanConfirmation = ChikouSpanConfirmation(symbol, PERIOD_CURRENT, 0);
+	int kenkanKijunCross = KenkanKijunCross(symbol, PERIOD_CURRENT, 0);
 
 	//Buy
 	if(ticket!=-1 && OrderSelect(ticket, SELECT_BY_TICKET) && OrderType() == OP_BUY && OrderCloseTime() == 0 ){
-		if(chikouSpanConfirmation <= 0){
+		if(chikouSpanConfirmation <= 0 || kenkanKijunCross == OP_SELL){
 			OrderClose(ticket, OrderLots(), NormalizeDouble(Bid, Digits), 10*unit_pip, clrRed);
          ticket == -1;
          EntryAnalysis();
@@ -135,7 +136,7 @@ void ExitAnalysis(){
 	
 	//Sell
    if(ticket!=-1 && OrderSelect(ticket, SELECT_BY_TICKET) && OrderType() == OP_SELL && OrderCloseTime() == 0 ){
-   	if(chikouSpanConfirmation >= 0){
+   	if(chikouSpanConfirmation >= 0 || kenkanKijunCross == OP_BUY){
    		OrderClose(ticket, OrderLots(), NormalizeDouble(Ask, Digits), 10*unit_pip, clrRed);
 			ticket == -1;
          EntryAnalysis();
