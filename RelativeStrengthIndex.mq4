@@ -1,10 +1,10 @@
-int RSICrossSignal(string symbol){
-   double rsi = iRSI(symbol, PERIOD_M30, 20, PRICE_CLOSE, 0);
-   double rsiL = iRSI(symbol,PERIOD_M30, 20, PRICE_CLOSE, 2);
+int RSICrossSignal(string symbol, int timeframe, int shift){
+   double rsi = iRSI(symbol, timeframe, 20, PRICE_CLOSE, shift);
+   double rsiL = iRSI(symbol, timeframe, 20, PRICE_CLOSE, shift+1);
    
-   if(rsi < 75 && rsiL > 75){
+   if(rsi < 70 && rsiL >= 70){
       return OP_SELL;
-   }else if(rsi > 25 && rsiL < 25){
+   }else if(rsi > 30 && rsiL <= 30){
       return OP_BUY;
    }
    

@@ -7,7 +7,7 @@
 
 #define MAGICMA 20000913
 
-extern double      risk=0.02;
+extern double      risk=0.005;
 extern double      maxBalance = 0;
 extern double      slatrScale=1;
 
@@ -105,7 +105,7 @@ void EntryAnalysis(){
 	}
 	
 	//Signal
-	if(kumoCloudTrend == OP_SELL && kenkanKijunCross == OP_BUY){
+	if(kumoCloudTrend == OP_SELL && kenkanKijunCross == OP_SELL){
 		//Momentum analysis:
 		if(kijunMediumTermMomentum < 0 && kenkanShortTermMomentum < 0){
 			//Lagging Span Check:
@@ -122,11 +122,13 @@ void EntryAnalysis(){
 
 void ExitAnalysis(){
 	int chikouSpanConfirmation = ChikouSpanConfirmation(symbol, PERIOD_CURRENT, 0);
-	int kenkanKijunCross = KenkanKijunCross(symbol, PERIOD_CURRENT, 0);
+	int kumoCloudTrend = KumoCloudTrend(symbol, PERIOD_CURRENT, 0);
+	int kenkanKijunCross = KenkanKijunCross(symbol, PERIOD_CURRENT, 0); 
+	int rsi = RSICrossSignal(symbol, PERIOD_CURRENT, 0);
 
 	//Buy
 	if(ticket!=-1 && OrderSelect(ticket, SELECT_BY_TICKET) && OrderType() == OP_BUY && OrderCloseTime() == 0 ){
-		if(chikouSpanConfirmation <= 0 || kenkanKijunCross == OP_SELL){
+		if(chikouSpanConfirmation <= 0 || kenkanKijunCross == OP_SELL || rsi == OP_SELL || kumoCloudTrend == -1){
 			OrderClose(ticket, OrderLots(), NormalizeDouble(Bid, Digits), 10*unit_pip, clrRed);
          ticket == -1;
          EntryAnalysis();
@@ -136,12 +138,30 @@ void ExitAnalysis(){
 	
 	//Sell
    if(ticket!=-1 && OrderSelect(ticket, SELECT_BY_TICKET) && OrderType() == OP_SELL && OrderCloseTime() == 0 ){
-   	if(chikouSpanConfirmation >= 0 || kenkanKijunCross == OP_BUY){
+   	if(chikouSpanConfirmation >= 0 || kenkanKijunCross == OP_BUY || rsi == OP_BUY || kumoCloudTrend == -1){
    		OrderClose(ticket, OrderLots(), NormalizeDouble(Ask, Digits), 10*unit_pip, clrRed);
 			ticket == -1;
          EntryAnalysis();
          return;
       }   
+   }
+   
+   //Stop Loss
+   if(ticket!=-1 && OrderSelect(ticket, SELECT_BY_TICKET) && OrderType() == OP_SELL && OrderCloseTime() == 0 ){
+   	double kijunTrailingStop = KijunTrailingStop(symbol, PERIOD_CURRENT, 0);
+   	if(kijunTrailingStop != OrderStopLoss()){
+   		if(OrderType() == OP_SELL && kijunTrailingStop > Ask){
+   			OrderClose(ticket, OrderLots(), NormalizeDouble(Ask, Digits), 10*unit_pip, clrRed);
+   			return;
+   		}
+   		
+   		if(OrderType() == OP_BUY && kijunTrailingStop < Bid){
+   			OrderClose(ticket, OrderLots(), NormalizeDouble(Bid, Digits), 10*unit_pip, clrRed);
+   			return;
+   		}
+   	
+   		OrderModify(ticket, OrderOpenPrice(), kijunTrailingStop, 0, 0, clrDarkOrange);
+   	}
    }
 } 
 
