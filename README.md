@@ -21,7 +21,7 @@ Personal Goals:
 
   * Command line mt4 integration and testing for micro version.
   
-  * Restructure and rebuild Xurya0Rapid and Xurya-Adaptive to comply to new coding, strategy, and risk management standards. 
+  * Restructure and rebuild outdated Xurya-Rapid and Xurya-Adaptive to comply to new coding, strategy, and risk management standards. 
 
 * Medium Term:
 
