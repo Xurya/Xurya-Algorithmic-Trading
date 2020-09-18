@@ -25,15 +25,15 @@ Personal Goals:
 
 * Medium Term:
 
-  * Implement Support/Resistance analysis
+  * Implement sturdy Support/Resistance analysis
 
   * Implement 10 different trading strategies
 
   * Develop dynamic heuristical risk management beyond trailing stops, ATR, and indicators
 
-  * Develop dynamic heuristical analysis and profit maximization
+  * Develop dynamic heuristical analysis for profit maximization (TP, transitions, etc)
 
-  * Develop better user interface and event logging for data collection
+  * Develop better user interface and event logging for data collection (visuals, messaging, etc.)
 
 * Long Term:
 
