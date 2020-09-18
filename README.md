@@ -8,13 +8,13 @@ Personal Goals:
   * Backtest using QuantManager and Duskacopy data :heavy_check_mark:
     > Completed 06/05/2020
 
-  * Run first EA on demo servers 24/7 through VNC/VPS :heavy_check_mark:
+  * Run first EA on demo servers 24/7 through Google Cloud:heavy_check_mark:
     > Completed 06/08/2020
 
   * Backtest, optimize, and cross-validate EA :heavy_check_mark:
     > Completed 7/20/2020
 
-  * Run first EA on live servers 24/7 through VNC/VPS :heavy_check_mark:
+  * Run first EA on live servers 24/7 through Google Cloud :heavy_check_mark:
     > Completed 7/21/2020
 
   * Barebones disk snapshot in preparation for low RAM micro session
