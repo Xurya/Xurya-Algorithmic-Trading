@@ -20,6 +20,8 @@ Personal Goals:
   * Barebones disk snapshot in preparation for low RAM micro session
 
   * Command line mt4 integration and testing for micro version.
+  
+  * Restructure and rebuild Xurya0Rapid and Xurya-Adaptive to comply to new coding, strategy, and risk management standards. 
 
 * Medium Term:
 
@@ -27,7 +29,7 @@ Personal Goals:
 
   * Implement 10 different trading strategies
 
-  * Develop dynamic heuristical risk management beyond trailing stops
+  * Develop dynamic heuristical risk management beyond trailing stops, ATR, and indicators
 
   * Develop dynamic heuristical analysis and profit maximization
 
